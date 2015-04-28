@@ -311,8 +311,7 @@ angular.module("ngCordova.plugins.oauth", ["ngCordova.plugins.oauthUtility"])
                     browserRef.addEventListener('loadstart', function(event) {
                         if((event.url).indexOf("http://localhost/callback") === 0) {
                             requestToken = (event.url).split("code=")[1];
-                            $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                            $http({method: "post", url: "https://www.linkedin.com/uas/oauth2/accessToken", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
+                            $http({method: "post", url: "https://www.linkedin.com/uas/oauth2/accessToken", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                             .success(function(data) {
                                 deferred.resolve(data);
                             })
